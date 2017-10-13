@@ -1,0 +1,54 @@
+use alienfile;
+
+use Sort::Naturally qw( ncmp );
+use File::chdir;
+use Path::Tiny qw( path );
+
+plugin 'Probe::CommandLine' => (
+  command => 'premake5',
+  args    => [ '--version' ],
+  match   => qr/premake5/,
+);
+
+share {
+  start_url 'https://github.com/premake/premake-core/releases';
+
+  plugin 'Download';
+  plugin 'Decode::HTML';
+
+  meta->register_hook( prefer => sub {
+    my ($build, $res) = @_;
+
+    return {
+      type => 'list',
+      list => [
+        grep {
+          $_->{filename} =~ /premake-[0-9.]+(-[a-z0-9]+)?-src\.zip$/
+        }
+        sort { ncmp $b->{filename}, $a->{filename} }
+        grep { $_->{url} =~ /releases/ }
+        @{ $res->{list} }
+      ],
+    };
+  });
+
+  plugin 'Extract' => 'zip';
+
+  build sub {
+    my ($build) = @_;
+
+    my $platform = 'unix';
+    for ($^O) {
+      $platform = 'macosx'  if /darwin/;
+      $platform = 'bsd'     if /bsd/;
+      $platform = 'windows' if /MSWin32/;
+    }
+
+    local $CWD = path($build->install_prop->{extract})
+      ->child('build', 'gmake.' . $platform)
+      ->canonpath;
+
+    system 'make';
+  };
+
+};
