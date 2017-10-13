@@ -1,6 +1,5 @@
 use alienfile;
 
-use Sort::Naturally qw( ncmp );
 use File::chdir;
 use Path::Tiny qw( path );
 
@@ -13,25 +12,12 @@ plugin 'Probe::CommandLine' => (
 share {
   start_url 'https://github.com/premake/premake-core/releases';
 
-  plugin 'Download';
+  plugin Download => (
+    filter  => qr/premake-[0-9.]+(-[a-z0-9]+)?-src\.zip$/,
+    version => qr/premake-([0-9.]+(?:-[a-z0-9]+)?)/,
+  );
+
   plugin 'Decode::HTML';
-
-  meta->register_hook( prefer => sub {
-    my ($build, $res) = @_;
-
-    return {
-      type => 'list',
-      list => [
-        grep {
-          $_->{filename} =~ /premake-[0-9.]+(-[a-z0-9]+)?-src\.zip$/
-        }
-        sort { ncmp $b->{filename}, $a->{filename} }
-        grep { $_->{url} =~ /releases/ }
-        @{ $res->{list} }
-      ],
-    };
-  });
-
   plugin 'Extract' => 'zip';
 
   build sub {
