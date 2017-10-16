@@ -1,12 +1,11 @@
-use strict;
-use warnings;
-
-# ABSTRACT: Build or find premake5
 package Alien::premake;
+# ABSTRACT: Build or find premake5
 
 our $VERSION = '0.001';
 
-use parent 'Alien::Base';
+use strict;
+use warnings;
+use base 'Alien::Base';
 
 sub exe {
   my ($class) = @_;
