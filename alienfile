@@ -53,5 +53,20 @@ share {
 
     $binary->copy($target);
     $target->chmod(0755);
+
+    $build->runtime_prop->{command} = $target->stringify;
   };
 };
+
+requires 'Capture::Tiny';
+
+gather sub {
+  my ($build) = @_;
+
+  my ($stdout) = Capture::Tiny::capture(sub {
+    system($build->runtime_prop->{command}, '--version');
+  });
+
+  my ($version) = $stdout =~ /premake5 \(.*\) ([0-9.]+(?:-[a-z0-9]+)?)/;
+  $build->runtime_prop->{version} = $version || 'unknown';
+}
