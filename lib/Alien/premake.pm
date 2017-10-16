@@ -24,6 +24,12 @@ Alien::premake - Build or find premake5
 
 =head1 SYNOPSIS
 
+    use Alien::premake;
+    use Env qw( @PATH );
+
+    unshift @ENV, Alien::premake->bin_dir;
+    my $premake = Alien::premake->exe;
+    system $premake, 'gmake';
 
 =head1 DESCRIPTION
 
