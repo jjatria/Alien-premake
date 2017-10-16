@@ -1,7 +1,6 @@
 use alienfile;
 
 use File::chdir;
-use Path::Tiny qw( path );
 
 plugin 'Probe::CommandLine' => (
   command => 'premake5',
@@ -9,9 +8,11 @@ plugin 'Probe::CommandLine' => (
   match   => qr/premake5/,
 );
 
-share {
-
+configure {
   requires 'File::chdir' => 0;
+};
+
+share {
   requires 'Path::Tiny'  => 0;
 
   start_url 'https://github.com/premake/premake-core/releases';
@@ -36,18 +37,18 @@ share {
 
     # Somehow changing directory with A::B's 'cd'
     # does not work in this case. 'No such directory', it says.
-    my $src_dir = path($build->install_prop->{extract})
+    my $src_dir = Path::Tiny::path($build->install_prop->{extract})
       ->child('build', "gmake.$platform");
 
     local $CWD = $src_dir->stringify;
     $build->system('%{make}', 'config=release');
 
     # Premake5 makefiles do not define an install target
-    my $bindir = path($build->install_prop->{prefix}, 'bin');
+    my $bindir = Path::Tiny::path($build->install_prop->{prefix}, 'bin');
     $bindir->mkpath;
 
     my $target = $bindir->child('premake5');
-    my $binary = path($build->install_prop->{extract})
+    my $binary = Path::Tiny::path($build->install_prop->{extract})
       ->child('bin', 'release', 'premake5');
 
     $binary->copy($target);
