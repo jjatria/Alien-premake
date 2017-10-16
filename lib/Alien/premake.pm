@@ -87,6 +87,11 @@ although these will not be as closely tracked.
 
 =back
 
+=head1 ACKNOWLEDGEMENTS
+
+Special thanks to Graham Ollis for his help in the preparation of this
+distribution.
+
 =head1 COPYRIGHT AND LICENSE
 
 This software is copyright (c) 2017 by José Joaquín Atria.
