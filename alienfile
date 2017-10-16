@@ -54,7 +54,7 @@ share {
     $binary->copy($target);
     $target->chmod(0755);
 
-    $build->runtime_prop->{command} = $target->stringify;
+    $build->runtime_prop->{command} = $target->basename;
   };
 };
 
