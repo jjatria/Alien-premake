@@ -12,6 +12,10 @@ sub exe {
   $class->runtime_prop->{command};
 }
 
+sub alien_helper {
+  return +{ premake5 => sub { Alien::premake5->exe } }
+}
+
 1;
 
 __END__
@@ -58,6 +62,17 @@ When using the executable compiled by this distribution, you
 will need to make sure that the directories returned by C<bin_dir> are added
 to your C<PATH> environment variable. For more info, check the documentation
 of L<Alien::Build>.
+
+=back
+
+=head1 HELPERS
+
+=over 4
+
+=item B<premake5>
+
+The C<%{premake5}> string will be interpolated by Alien::Build into the name
+of the premake5 executable (as returned by B<exe>);
 
 =back
 
