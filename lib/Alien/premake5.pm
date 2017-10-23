@@ -1,4 +1,4 @@
-package Alien::premake;
+package Alien::premake5;
 # ABSTRACT: Build or find premake5
 
 our $VERSION = '0.001';
@@ -20,15 +20,15 @@ __END__
 
 =head1 NAME
 
-Alien::premake - Build or find premake5
+Alien::premake5 - Build or find premake5
 
 =head1 SYNOPSIS
 
-    use Alien::premake;
+    use Alien::premake5;
     use Env qw( @PATH );
 
-    unshift @ENV, Alien::premake->bin_dir;
-    my $premake = Alien::premake->exe;
+    unshift @ENV, Alien::premake5->bin_dir;
+    my $premake = Alien::premake5->exe;
     system $premake, 'gmake';
 
 =head1 DESCRIPTION
@@ -37,7 +37,7 @@ Premake is a build tool that allows a software project to be described with a
 single common build script, which can then be used to generate project files
 for building under a wide variety of build environments.
 
-B<Alien::premake> uses L<Alien::Build> to make it easier to use premake in a
+B<Alien::premake5> uses L<Alien::Build> to make it easier to use premake in a
 Perl application or project.
 
 This distribution will find an available version of C<premake5>, or attempt to
@@ -49,7 +49,7 @@ build one from source.
 
 =item B<exe>
 
-    my $premake = Alien::premake->exe;
+    my $premake = Alien::premake5->exe;
 
 Returns the name of the premake executable. Currently, this should be
 C<premake5>.
@@ -74,7 +74,7 @@ of L<Alien::Build>.
 Contributions of any kind are most welcome!
 
 The main repository for this distribution is on
-L<Github|https://github.com/jjatria/Alien-premake>, which is where patches
+L<Github|https://github.com/jjatria/Alien-premake5>, which is where patches
 and bug reports are mainly tracked. Bug reports can also be sent through the
 CPAN RT system, or by mail directly to the developers at the addresses below,
 although these will not be as closely tracked.

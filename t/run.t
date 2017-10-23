@@ -1,10 +1,10 @@
 use Test2::V0;
 use Test::Alien;
-use Alien::premake ();
+use Alien::premake5;
 
-alien_ok 'Alien::premake';
+alien_ok 'Alien::premake5';
 
-my $run = run_ok([ Alien::premake->exe, '--version' ])->exit_is(0);
+my $run = run_ok([ Alien::premake5->exe, '--version' ])->exit_is(0);
 $run->success ? $run->note : $run->diag;
 
 done_testing;

@@ -43,7 +43,7 @@ share {
     local $CWD = $src_dir->stringify;
     $build->system('%{make}', 'config=release');
 
-    # Premake5 makefiles do not define an install target
+    # premake5 makefiles do not define an install target
     my $bindir = Path::Tiny::path($build->install_prop->{prefix}, 'bin');
     $bindir->mkpath;
 
