@@ -14,10 +14,18 @@ matrix:
   allow_failures:
     - perl: blead
 env:
+  matrix:
+    - ALIEN_INSTALL_TYPE=system
+    - ALIEN_INSTALL_TYPE=share
   global:
     - RELEASE_TESTING=1
     - AUTHOR_TESTING=1
+
+before_script:
+  - export PATH="$HOME/.local/bin:$PATH"
+
 before_install:
   - eval $(curl https://travis-perl.github.io/init) --auto
   - cpanm -n App::af
   - af missing | cpanm
+  - if [ "$ALIEN_INSTALL_TYPE" == "system" ]; then echo "Manually installing a system premake5 for testing"; mkdir -p $HOME/.local/bin; wget --quiet -O - https://github.com/premake/premake-core/releases/download/v5.0.0-alpha12/premake-5.0.0-alpha12-linux.tar.gz | tar -xz; mv premake5 $HOME/.local/bin; fi
