@@ -37,6 +37,13 @@ build one from source.
     to your `PATH` environment variable. For more info, check the documentation
     of [Alien::Build](https://metacpan.org/pod/Alien::Build).
 
+# HELPERS
+
+- **premake5**
+
+    The `%{premake5}` string will be interpolated by Alien::Build into the name
+    of the premake5 executable (as returned by **exe**);
+
 # SEE ALSO
 
 - [https://premake.github.io/](https://premake.github.io/)
