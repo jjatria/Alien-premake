@@ -25,7 +25,8 @@ before_script:
   - export PATH="$HOME/.local/bin:$PATH"
 
 before_install:
+  - if [ "$TRAVIS_BRANCH" == "build"  ]; then rm -f dist.ini; fi
+  - if [ "$ALIEN_INSTALL_TYPE" == "system" ]; then echo "Manually installing a system premake5 for testing"; mkdir -p $HOME/.local/bin; wget --quiet -O - https://github.com/premake/premake-core/releases/download/v5.0.0-alpha12/premake-5.0.0-alpha12-linux.tar.gz | tar -xz; mv premake5 $HOME/.local/bin; fi
   - eval $(curl https://travis-perl.github.io/init) --auto
   - cpanm -nq App::af
   - af missing | cpanm -nq
-  - if [ "$ALIEN_INSTALL_TYPE" == "system" ]; then echo "Manually installing a system premake5 for testing"; mkdir -p $HOME/.local/bin; wget --quiet -O - https://github.com/premake/premake-core/releases/download/v5.0.0-alpha12/premake-5.0.0-alpha12-linux.tar.gz | tar -xz; mv premake5 $HOME/.local/bin; fi
