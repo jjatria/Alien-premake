@@ -26,7 +26,7 @@ name: Alien-premake5
 provides:
   Alien::premake5:
     file: lib/Alien/premake5.pm
-    version: '0.001'
+    version: '0.002'
 requires:
   Alien::Base: '0'
   base: '0'
@@ -36,7 +36,7 @@ requires:
 resources:
   bugtracker: https://github.com/jjatria/Alien-premake5/issues
   repository: git://github.com/jjatria/Alien-premake5.git
-version: '0.001'
+version: '0.002'
 x_alienfile:
   generated_by: 'Dist::Zilla::Plugin::AlienBuild version 0.24'
   requires:
