@@ -8,6 +8,10 @@ environment:
       - install_perl: "%install_active_perl%"
         version: "5.24.1.2402"
 
+init:
+  - git config --global user.email "app@veyor.pizza"
+  - git config --global user.name "App Veyor"
+
 install:
   # Install perl
   - cmd: "%install_perl%"
