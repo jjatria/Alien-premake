@@ -39,7 +39,7 @@ share {
 
     my $executable = 'premake5' . ($source eq 'windows' ? '.exe' : '');
     my $binary = ($source eq 'src')
-      ? build_from_source($build)
+      ? build_from_source($build, $executable)
       : Path::Tiny::path( $build->install_prop->{extract} )
           ->child($executable);
 
@@ -47,7 +47,7 @@ share {
     my $bindir = Path::Tiny::path( $build->install_prop->{prefix}, 'bin' );
     $bindir->mkpath;
 
-    my $target = $bindir->child('premake5');
+    my $target = $bindir->child($executable);
 
     $binary->copy($target);
     $target->chmod(0755);
@@ -70,7 +70,7 @@ gather sub {
 };
 
 sub build_from_source {
-  my ($build) = @_;
+  my ($build, $executable) = @_;
 
   my $platform = 'unix';
   for ($^O) {
@@ -88,5 +88,5 @@ sub build_from_source {
   $build->system('%{make}', 'config=release');
 
   return Path::Tiny::path( $build->install_prop->{extract} )
-    ->child('bin', 'release', 'premake5');
+    ->child('bin', 'release', $executable);
 }
