@@ -2,6 +2,14 @@ Revision history for Alien::premake5
 
 {{$NEXT}}
 
+  Changes:
+    * Attempts to download a binary if available instead of compiling
+      from source. Fallbacks to compilation from source.
+
+  Fixes:
+    * Adds extension to name of Windows binary, which should solve some
+      installation errors.
+
 0.001     2017-10-30 13:31:43+00:00 Europe/London
 
   * Initial release
