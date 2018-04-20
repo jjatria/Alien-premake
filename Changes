@@ -2,6 +2,9 @@ Revision history for Alien::premake5
 
 {{$NEXT}}
 
+  Fixes:
+    * Switch to using gmake to fix installation in BSD variants.
+
 0.002     2018-04-15 09:07:34+01:00 Europe/London
 
   Changes:
